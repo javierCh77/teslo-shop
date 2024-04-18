@@ -20,18 +20,19 @@ export const SideBar = () => {
       {/* aqui background blac */}
         {
             isSideMenuOpen && (
-                <div className="fixed top-0 left-0 w-screen h-screen z-10 bg-black opacity-30"></div>
+                <div 
+                className="fixed top-0 left-0 w-screen h-screen z-10 bg-black opacity-30"></div>
                               )
         }
       {/* aqui background blur */}
         {
         isSideMenuOpen && (
-            <div className="fade-in fixed top-0 left-0 w-screen h-screen z-10  backdrop-filter backdrop-blur-sm"></div>
+            <div
+            onClick={closeMenu}
+            className="fade-in fixed top-0 left-0 w-screen h-screen z-10  backdrop-filter backdrop-blur-sm"></div>
                           )    
         }
       {/* side menu */}
-
-
       <nav className={
               clsx(
                 "bg-white fixed p-5 right-0 top-0 w-[300px] h-screen  z-20 shadow-2xl transform transition-all duration-300",
