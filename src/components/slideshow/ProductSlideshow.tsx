@@ -3,24 +3,22 @@
 import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import {Swiper as SwiperObjet} from 'swiper'
-import {FreeMode, Navigation, Thumbs} from 'swiper/modules'
-
+import {Autoplay,FreeMode, Navigation, Thumbs} from 'swiper/modules'
+// style 
 import 'swiper/css';
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
-
 import './slideshow.css'
 import Image from 'next/image'
+
+
 
 interface Props{
   images:string[];
   title:string;
   className?:string;
 }
-
-
-
 
 
 export const ProductSlideshow = ({images, title, className}:Props) => {
@@ -38,8 +36,13 @@ export const ProductSlideshow = ({images, title, className}:Props) => {
         }
         spaceBetween={10}
         navigation={true}
-        thumbs={{ swiper: thumbsSwiper }}
-        modules={[FreeMode, Navigation, Thumbs]}
+        autoplay={{
+          delay: 2500
+        }}
+        thumbs={{ swiper: 
+        thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper:null
+        }}
+        modules={[FreeMode, Navigation, Thumbs, Autoplay]}
         className="mySwiper2"
       >
       {
