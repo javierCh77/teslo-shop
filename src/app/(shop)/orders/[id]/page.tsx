@@ -19,8 +19,6 @@ const productsInCart = [
 ];
 
 
-
-
 export default function ({params}: Props) {
     
     const {id} = params;
@@ -28,9 +26,6 @@ export default function ({params}: Props) {
     //todo verificar 
     //redirect (/)
     
-    
-
-
   return (
     <div className="flex justify-center items-center mb-72 px-10 sm:px-2">
       <div className="flex flex-col w-[1000px] ">
