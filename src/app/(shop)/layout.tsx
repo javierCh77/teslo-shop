@@ -1,4 +1,4 @@
-import { TopMenu, SideBar } from '@/components'
+import { TopMenu, SideBar, Footer } from '@/components'
 
 
 
@@ -22,7 +22,7 @@ export default function ShopLayout({
     <div className='px-2 sm:px-10 '>
      {children}
     </div>
-    
+    <Footer/>   
     </main>
   );
 }

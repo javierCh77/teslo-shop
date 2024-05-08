@@ -2,13 +2,21 @@ import { QuantitySelector, Title } from "@/components";
 import { initialData } from "@/seed/seed";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+
+const productsInCart = [
+  initialData.products[0],
+  initialData.products[1],
+  initialData.products[2],
+];
+
+
+
 
 export default function () {
-  const productsInCart = [
-    initialData.products[0],
-    initialData.products[1],
-    initialData.products[2],
-  ];
+    
+    // redirect('/empty')
+    
 
   return (
     <div className="flex justify-center items-center mb-72 px-10 sm:px-2">
@@ -46,7 +54,7 @@ export default function () {
             ))}
           </div>
           {/* checkout */}
-          <div className="p-7 bg-white rounded-xl shadow-xl">
+          <div className="right-10 p-7 bg-white rounded-xl shadow-xl h-fit">
             <h2 className="text-2xl mb-2">Resumen de orden</h2>
             <div className="grid grid-cols-2">
               
