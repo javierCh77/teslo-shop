@@ -19,11 +19,11 @@ model Product {
   description  String
   inStock      Int
   price        Float          @default(0)
-  sizes         Size[]         @default([])
   slug         String         @unique
   tags         String[]       @default([])
   gender       Gender
   categoryId   String
+  sizes        Size[]         @default([])
   category     Category       @relation(fields: [categoryId], references: [id])
   ProductImage ProductImage[]
 
