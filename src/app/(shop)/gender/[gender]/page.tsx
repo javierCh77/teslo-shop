@@ -1,12 +1,11 @@
+export const revalidate = 60;
+
 import { getPaginatedProductsWithImages } from "@/actions";
 import { ProductGrid, Title } from "@/components";
 import Pagination from "@/components/ui/pagination/Pagination";
-import { initialData } from "@/seed/seed";
 import { Gender } from "@prisma/client";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 
-
-const seedProducts = initialData.products;
 
 interface Props {
   params: {
@@ -21,7 +20,6 @@ interface Props {
 export default async function ({ params, searchParams }: Props) {
   const { gender } = params;
   
-  
   const page = searchParams.page ? parseInt(searchParams.page) : 1;
 
   const { products, currentPage, totalPages } = await getPaginatedProductsWithImages({ page, gender:gender as Gender });
@@ -29,9 +27,7 @@ export default async function ({ params, searchParams }: Props) {
   if( products.length === 0 ) {
     redirect(`/gender/${gender}`);
   }
-  
-  
-  
+
   
   const labels: Record<string, string> = {
     'men':'para hombres',
@@ -46,6 +42,7 @@ export default async function ({ params, searchParams }: Props) {
 
   return (
    <>
+   
     <Title 
       title={`Articulos de ${ labels[gender]}`}
       subtitle='Todos los productos'
@@ -56,11 +53,10 @@ export default async function ({ params, searchParams }: Props) {
       products={products}
     />
     
-    
     <Pagination 
       totalPages={totalPages}
     />
-    
+
    </>
   );
 }
