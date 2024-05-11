@@ -3,7 +3,7 @@ import { initialData } from "@/seed/seed";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function () {
+export default function CheckoutPage() {
   const productsInCart = [
     initialData.products[0],
     initialData.products[1],

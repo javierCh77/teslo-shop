@@ -19,7 +19,7 @@ const productsInCart = [
 ];
 
 
-export default function ({params}: Props) {
+export default function OrdersByIdPage ({params}: Props) {
     
     const {id} = params;
     
@@ -88,11 +88,6 @@ export default function ({params}: Props) {
             
             {/* Divider */}
               <div className="w-full h-0.5 rounded bg-gray-200 mb-10">
-              
-              
-              
-              
-              
               
               
               </div>
