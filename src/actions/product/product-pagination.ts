@@ -38,7 +38,7 @@ export const getPaginatedProductsWithImages = async ({
       totalPages: totalPages,
       products: products.map((product) => ({
         ...product,
-        images: product.ProductImage.map((image) => image.url),
+        images: product.ProductImage.map((image) => image.url)
       })),
     };
   } catch (error) {

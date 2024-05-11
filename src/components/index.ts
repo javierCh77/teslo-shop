@@ -11,3 +11,5 @@ export * from './product/quantity-selector/QuantitySelector'
 export * from './slideshow/ProductSlideshow'
 export * from './slideshow/ProductMobileSlideshow'
 export * from './ui/footer/Footer'
+
+export * from './ui/pagination/Pagination'
