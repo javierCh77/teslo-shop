@@ -1,11 +1,12 @@
 "use server";
+
 import prisma from "@/lib/prisma";
 import { Gender } from "@prisma/client";
 
 interface PaginationOptions {
   page?: number;
   take?: number;
-  gender?:Gender;
+  gender?: Gender;
 }
 
 export const getPaginatedProductsWithImages = async ({
@@ -29,16 +30,16 @@ export const getPaginatedProductsWithImages = async ({
           },
         },
       },
-      where:{
-        gender:gender
+      where: {
+        gender: gender,
       },
     });
 
     //  total page
     //todo
     const totalCount = await prisma.product.count({
-      where:{
-        gender:gender
+      where: {
+        gender: gender,
       },
     });
     const totalPages = Math.ceil(totalCount / take);
@@ -48,7 +49,7 @@ export const getPaginatedProductsWithImages = async ({
       totalPages: totalPages,
       products: products.map((product) => ({
         ...product,
-        images: product.ProductImage.map((image) => image.url)
+        images: product.ProductImage.map((image) => image.url),
       })),
     };
   } catch (error) {
