@@ -3,12 +3,19 @@ import { initialData } from "@/seed/seed";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { ProductInCart } from "./ui/ProductInCart";
 
 const productsInCart = [
   initialData.products[0],
   initialData.products[1],
   initialData.products[2],
 ];
+
+
+
+
+
+
 
 
 
@@ -30,28 +37,13 @@ export default function CartPage () {
               Continuar comprando
             </Link>
 
+
+
+
             {/* items */}
-            {productsInCart.map((product) => (
-              <div className="flex mb-5" key={product.slug}>
-                <Image
-                  src={`/products/${product.images[0]}`}
-                  width={100}
-                  height={100}
-                  style={{
-                    width: '100px',
-                    height: '100px',
-                  }}
-                  alt={product.title}
-                  className="mb-5 rounded"
-                />
-                <div className="ml-5">
-                  <p>{product.title}</p>
-                  <p>{product.price}</p>
-                  <QuantitySelector quantity={3} />
-                  <button></button>
-                </div>
-              </div>
-            ))}
+            
+            <ProductInCart/>
+            
           </div>
           {/* checkout */}
           <div className="right-10 p-7 bg-white rounded-xl shadow-xl h-fit">
