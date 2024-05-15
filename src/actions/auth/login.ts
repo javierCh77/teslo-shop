@@ -11,17 +11,19 @@ export async function authenticate(
   formData: FormData
 ) {
   try {
-    await sleep(2)
-    await signIn("credentials", Object.fromEntries(formData));
+    //await sleep(2)
+    await signIn("credentials",{
+    ...Object.fromEntries(formData),
+      redirect:false,
+    });
+    
+    return 'Success';
+    
   } catch (error) {
-    // if (error instanceof AuthError) {
-    //   switch (error.type) {
-    //     case "CredentialsSignin":
-    //       return "Invalid credentials.";
-    //     default:
-    return "CredentialsSignin";
-    // }
-    //}
-    // throw error;
+    
+    if(( error as any).type === 'CredentialsSignin'){
+      return 'Credentials Signin'
+    }
+    return "UnkNownError";
   }
 }
