@@ -5,6 +5,7 @@ import Link from "next/link";
 import React from "react";
 import { IoCloseOutline, IoLogInOutline, IoLogOutOutline, IoPeopleOutline, IoPersonAddOutline, IoSearchOutline, IoShirtOutline, IoTicketOutline,} from "react-icons/io5";
 import clsx from 'clsx'
+import { logout } from "@/actions";
 
 
 
@@ -81,13 +82,13 @@ export const SideBar = () => {
           <span className="ml-3 text-lg">Ingresar</span>
         </Link>
 
-        <Link
-          href="/"
-          className="flex items-center mt-2 p-2 hover:bg-gray-100 rounded transition-all"
+        <button
+          onClick={() => logout()}
+          className="flex ww-full items-center mt-2 p-2 hover:bg-gray-100 rounded transition-all"
         >
           <IoLogOutOutline size={20} />
           <span className="ml-3 text-lg">Salir</span>
-        </Link>
+        </button>
         {/*  line separator */}
         <div className="w-full h-px bg-gray-200 my-10 rounded" />
         <Link
