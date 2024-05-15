@@ -33,7 +33,7 @@ export const LoginForm = () => {
       
       <div className="flex h-8 items-end space-x-1"
       aria-live='polite'
-      aria-aotmic='true'
+      aria-atomic='true'
       >
       {state === 'CredentialsSignin'&& (
           <div className="flex flex-row mb-2">
