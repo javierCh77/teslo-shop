@@ -9,14 +9,13 @@ import { IoCartOutline, IoSearchOutline } from "react-icons/io5";
 export const TopMenu = () => {
   const openSideMenu = useUIStore((state) => state.openSideMenu);
   const totalItemsInCart = useCartStore((state) => state.getTotalItems());
-  
-  const [loaded, setLoaded] = useState(false)
-  
+
+  const [loaded, setLoaded] = useState(false);
+
   useEffect(() => {
-    setLoaded(true)
-  },[])
-  
-  
+    setLoaded(true);
+  }, []);
+
   return (
     <nav className="flex px-5 justify-between items-center w-full">
       <div>
@@ -53,10 +52,17 @@ export const TopMenu = () => {
         <Link href="/search" className="mx-2">
           <IoSearchOutline className="w-5 h-5" />
         </Link>
-        <Link href="/cart" className="mx-2">
+        <Link
+          href={
+          (( totalItemsInCart === 0) && loaded) 
+          ? "/empty" 
+          : "/cart"
+          }
+          className="mx-2"
+        >
           <div className="relative">
-            { ( loaded && totalItemsInCart > 0) && (
-              <span className=" text-xs absolute rounded-full px-1 font-bold -top-2 bg-blue-700 text-white -right-2">
+            {loaded && totalItemsInCart > 0 && (
+              <span className=" fade-in text-xs absolute rounded-full px-1 font-bold -top-2 bg-blue-700 text-white -right-2">
                 {totalItemsInCart}
               </span>
             )}
