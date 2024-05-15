@@ -4,15 +4,14 @@ import { persist } from "zustand/middleware";
 
 interface State {
   cart: CartProduct[];
-  
-  getTotalItems:() =>number;
 
-  //addproduct to carty
+  getTotalItems: () => number;
+  //updateProductquantiy * done
+  //addproduct to carty *done
+  //deleteProduct  * done
   addProductTocart: (product: CartProduct) => void;
-
-  //updateProductquantiy
-
-  //deleteProduct
+  updateProductQuantity: (product: CartProduct, quantity: number) => void;
+  removeProduct: (id: CartProduct) => void;
 }
 
 export const useCartStore = create<State>()(
@@ -21,12 +20,12 @@ export const useCartStore = create<State>()(
       cart: [],
 
       //methods
-        
+
       getTotalItems: () => {
         const { cart } = get();
         return cart.reduce((total, item) => total + item.quantity, 0);
       },
-      
+
       // logica para agregar un producto
       addProductTocart: (product: CartProduct) => {
         const { cart } = get();
@@ -48,11 +47,30 @@ export const useCartStore = create<State>()(
 
         set({ cart: updateCartProducts });
       },
+
+      updateProductQuantity: (product: CartProduct, quantity: number) => {
+        const { cart } = get();
+
+        const updatedCartProduct = cart.map((item) => {
+          if (item.id === product.id && item.size === product.size) {
+            return { ...item, quantity: quantity };
+          }
+          return item;
+        });
+        set({ cart: updatedCartProduct });
+      },
+
+      removeProduct: (product: CartProduct) => {
+        const { cart } = get();
+        const updateCartProducts = cart.filter(
+          (item) => item.id !== product.id || item.size !== product.size
+        );
+        set({ cart: updateCartProducts });
+      },
     }),
 
     {
       name: "shopping-cart",
-      
     }
   )
 );

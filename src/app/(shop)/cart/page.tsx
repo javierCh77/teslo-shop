@@ -14,12 +14,6 @@ const productsInCart = [
 
 
 
-
-
-
-
-
-
 export default function CartPage () {
     
     // redirect('/empty')
