@@ -13,6 +13,24 @@ export const authConfig:NextAuthConfig = {
     signIn: '/auth/login',
     newUser:'/auth/new-account',
   },
+  
+  callbacks:{
+    jwt({token, user} ){
+    if(user){
+      token.data = user;
+    }  
+    return token;
+    },
+    
+    session ( {session, token}){
+    session.user = token.data as any;
+    return session
+    }
+  },
+  
+  
+  
+  
   providers:[
     Credentials({
       async authorize(credentials) {
@@ -37,10 +55,10 @@ export const authConfig:NextAuthConfig = {
           // regreso el resto de los datos sin el password
           const { password:_, ...rest} = user;
           
-          console.log(rest)
+       
           return rest;
           
-          console.log(rest);
+         
           
           
           
@@ -53,4 +71,4 @@ export const authConfig:NextAuthConfig = {
 };
 
 
-export const { signIn, signOut, auth} = NextAuth( authConfig);
+export const { signIn, signOut, auth, handlers} = NextAuth( authConfig);

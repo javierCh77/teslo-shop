@@ -22,7 +22,7 @@ export async function authenticate(
   } catch (error) {
     
     if(( error as any).type === 'CredentialsSignin'){
-      return 'Credentials Signin'
+      return 'CredentialsSignin'
     }
     return "UnkNownError";
   }
