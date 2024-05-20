@@ -17,13 +17,19 @@ import clsx from "clsx";
 import { logout } from "@/actions";
 import { useSession } from "next-auth/react";
 
+
+
+
+
 export const SideBar = () => {
+
   const isSideMenuOpen = useUIStore((state) => state.isSideMenuOpen);
   const closeMenu = useUIStore((state) => state.closeSideMenu);
+  
   const { data: session } = useSession();
   const isAuthenticated = !!session?.user;
-
   const isAdmin = session?.user.role === "admin";
+
 
   return (
     <div>
@@ -85,7 +91,7 @@ export const SideBar = () => {
 
         {isAuthenticated && (
           <button
-            onClick={() => logout()}
+            onClick={() => logout(window.)}
             className="flex ww-full items-center mt-2 p-2 hover:bg-gray-100 rounded transition-all"
           >
             <IoLogOutOutline size={20} />

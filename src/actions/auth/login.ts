@@ -12,18 +12,29 @@ export async function authenticate(
 ) {
   try {
     //await sleep(2)
-    await signIn("credentials",{
-    ...Object.fromEntries(formData),
-      redirect:false,
+    await signIn("credentials", {
+      ...Object.fromEntries(formData),
+      redirect: false,
     });
-    
-    return 'Success';
-    
+
+    return "Success";
   } catch (error) {
-    
-    if(( error as any).type === 'CredentialsSignin'){
-      return 'CredentialsSignin'
+    if ((error as any).type === "CredentialsSignin") {
+      return "CredentialsSignin";
     }
     return "UnkNownError";
   }
 }
+
+export const login = async (name: string, password: string) => {
+  try {
+    await signIn("credentials", { name, password });
+    return { ok: true };
+  } catch (error) {
+    console.log(error);
+    return {
+      ok: false,
+      message: "No se pudo iniciar sesion",
+    };
+  }
+};

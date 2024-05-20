@@ -23,6 +23,7 @@ export const LoginForm = () => {
   console.log({ state });
 
   return (
+  
     <form action={dispatch} className="flex flex-col">
       <label htmlFor="email">Correo electrónico</label>
       <input
