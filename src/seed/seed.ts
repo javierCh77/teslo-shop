@@ -30,6 +30,12 @@ interface SeedData {
   products: SeedProduct[];
 }
 
+interface SeedCountry{
+  name: string;
+  id:string;
+}
+
+
 export const initialData: SeedData = {
 
   users:[
