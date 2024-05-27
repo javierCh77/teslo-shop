@@ -12,9 +12,9 @@ interface State {
     country: string;
     phone: string;
   };
-  // metodos
+
+  // Methods
   setAddress: (address: State["address"]) => void;
-  
 }
 
 export const useAddressStore = create<State>()(
@@ -34,7 +34,6 @@ export const useAddressStore = create<State>()(
       setAddress: (address) => {
         set({ address });
       },
-      
     }),
     {
       name: "address-storage",
