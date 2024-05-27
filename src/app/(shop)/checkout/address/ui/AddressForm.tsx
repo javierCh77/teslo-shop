@@ -16,7 +16,7 @@ type FormInputs = {
   firstName: string;
   lastName: string;
   address: string;
-  address2?: string;
+  address2?: string ;
   postalCode: string;
   city: string;
   country: string;
@@ -42,7 +42,7 @@ export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
   });
 
   const { data: session } = useSession({
-    required: true,
+    required: false,
   })
 
   const setAddress = useAddressStore( state => state.setAddress );

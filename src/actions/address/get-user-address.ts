@@ -18,7 +18,7 @@ export const getUserAddress = async( userId: string ) => {
     return {
       ...rest,
       country: countryId,
-      address2: address2 ? address2 : '',
+      address2: address2 ? address2 : '_',
     };
 
 
