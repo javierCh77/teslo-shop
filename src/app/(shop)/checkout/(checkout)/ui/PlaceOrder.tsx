@@ -4,14 +4,16 @@ import { placeOrder } from "@/actions";
 import { useAddressStore, useCartStore } from "@/store";
 import { currencyFormat, sleep } from "@/utils";
 import clsx from "clsx";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 export const PlaceOrder = () => {
-    
+
+  const router = useRouter();
   const [loaded, setLoaded] = useState(false);
   const [isPlacingOrder, setIsPlacingOrder] = useState(false);
-  
+  const [errorMessage, setErrorMessage] = useState('');
+
   //gestor de estado con la info que necesito
   //traigo el store de la direccion
   const address = useAddressStore((state) => state.address);
@@ -20,38 +22,36 @@ export const PlaceOrder = () => {
     state.getSummaryInformation()
   );
   const cart = useCartStore((state) => state.cart);
+  const clearCart = useCartStore((state) => state.clearCart);
   ////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     setLoaded(true);
   }, []);
 
-    
-  const onPlaceOrder = async() =>{
+  const onPlaceOrder = async () => {
     setIsPlacingOrder(true);
-    
-    const productsToOrder = cart.map(product =>({
-        productId:product.id,
-        quantity:product.quantity,
-        size:product.size,
-    }))
-    
-    
-    console.log({address, productsToOrder});
-    
+
+    const productsToOrder = cart.map((product) => ({
+      productId: product.id,
+      quantity: product.quantity,
+      size: product.size,
+    }));
+
+    console.log({ address, productsToOrder });
+
     //await sleep(2);
     //todo server accion
     const resp = await placeOrder(productsToOrder, address);
-    console.log(resp);
+    if(!resp.ok){
+      setIsPlacingOrder(false);
+      setErrorMessage(resp.message);
+    return;
+    }
+    clearCart();
+    router.replace('/orders/'+ resp.order?.id);
     
-    
-    
-    
-    setIsPlacingOrder(false);
-  }  
-
-    
-
+  };
 
   if (!loaded) {
     return <p>Cargando...</p>;
@@ -106,16 +106,14 @@ export const PlaceOrder = () => {
           </span>
         </p>
 
-        {/* <p className="text-red-500">Error de creacion</p> */}
+        <p className="text-red-500">{errorMessage}</p>
         <button
           //href="/orders/123"
           onClick={onPlaceOrder}
-          className={
-            clsx({
-                'btn-primary':!isPlacingOrder,
-                'btn-disabled':isPlacingOrder
-            })
-          }
+          className={clsx({
+            "btn-primary": !isPlacingOrder,
+            "btn-disabled": isPlacingOrder,
+          })}
         >
           Colocar orden
         </button>

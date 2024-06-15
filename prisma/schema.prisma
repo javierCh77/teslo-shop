@@ -110,14 +110,14 @@ model Order {
   tax          Float
   total        Float
   itemsInOrder Int
-  isPaid       Boolean
+  isPaid       Boolean   @default(false)
   paidAt       DateTime?
 
   createAt DateTime @default(now())
   updateAt DateTime @updatedAt
 
   // relation
-  user         User           @relation(fields: [userId], references: [id])
+  user         User          @relation(fields: [userId], references: [id])
   userId       String
   OrderItem    OrderItem[]
   //sin las [] para que sea de 1 a 1 
